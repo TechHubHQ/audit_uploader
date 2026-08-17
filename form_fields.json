@@ -1,0 +1,522 @@
+[
+  {
+    "question": "UHID/IP NUMBER",
+    "entry_id": "1388635514",
+    "type": 0
+  },
+  {
+    "question": "Location",
+    "entry_id": "1551094033",
+    "type": 0
+  },
+  {
+    "question": "Doctor Name",
+    "entry_id": "16127784",
+    "type": 0
+  },
+  {
+    "question": "Department",
+    "entry_id": "2039185993",
+    "type": 0
+  },
+  {
+    "question": "Audit Date",
+    "entry_id": "591659533",
+    "type": 9
+  },
+  {
+    "question": "Drug Allergies Mentioned",
+    "entry_id": "1784678943",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Total number of drugs in the prescription",
+    "entry_id": "209346204",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs doses stated appropriately ",
+    "entry_id": "1751052506",
+    "type": 2,
+    "options": [
+      "YES",
+      "NO"
+    ]
+  },
+  {
+    "question": "How many drugs did not have doses stated appropriately",
+    "entry_id": "1561041470",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs frequency stated appropriately ",
+    "entry_id": "1202982505",
+    "type": 2,
+    "options": [
+      "YES",
+      "NO"
+    ]
+  },
+  {
+    "question": "How many drugs did not have Frequency stated appropriately",
+    "entry_id": "1354743444",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs routes stated appropriately ",
+    "entry_id": "1135952575",
+    "type": 2,
+    "options": [
+      "YES",
+      "NO"
+    ]
+  },
+  {
+    "question": "How many drugs did no have Route stated approriately",
+    "entry_id": "1751732405",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs are having units mentioned",
+    "entry_id": "1063818880",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany drugs not mentioned Units",
+    "entry_id": "1848256539",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs having concentration mentioned",
+    "entry_id": "1376144118",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany drugs did not mentioned concentration",
+    "entry_id": "1856700929",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs are having rate of administration mentioned",
+    "entry_id": "2061050192",
+    "type": 2,
+    "options": [
+      "YES",
+      "NO"
+    ]
+  },
+  {
+    "question": "Howmany drugs didnot have rate of administration not mentioned",
+    "entry_id": "2056724869",
+    "type": 0
+  },
+  {
+    "question": "were prescription having incorrect drug selection",
+    "entry_id": "1275427364",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany drugs did have incorrect drug selection",
+    "entry_id": "1495692158",
+    "type": 0
+  },
+  {
+    "question": "Was the prescription legible",
+    "entry_id": "836345919",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany drugs are illegible",
+    "entry_id": "854824962",
+    "type": 0
+  },
+  {
+    "question": "Were only standard abbreviations used in the prescripton",
+    "entry_id": "1410566836",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many Non approved abbreviations used",
+    "entry_id": "1435594645",
+    "type": 0
+  },
+  {
+    "question": "Was the prescription written in capital letters",
+    "entry_id": "1168270256",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drug names were not written in capital letters",
+    "entry_id": "1296653463",
+    "type": 0
+  },
+  {
+    "question": "Were Drug-Drug Interactions mentioned appropriately",
+    "entry_id": "1140705989",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs had non modification of drug dose keeping in mind drug drug interactions",
+    "entry_id": "1922209467",
+    "type": 0
+  },
+  {
+    "question": "Were Drug-Food interactions mentioned appropriately",
+    "entry_id": "1835851095",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs had non modification of time of administration or dose keeping in mind drug food interactions",
+    "entry_id": "1426221511",
+    "type": 0
+  },
+  {
+    "question": "Were Wrong Formulation Transcribed/Indented",
+    "entry_id": "833002773",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany Wrong Formulation Transcribed/Indented",
+    "entry_id": "1857844228",
+    "type": 0
+  },
+  {
+    "question": "Were Wrong drugs Transcribed/Indented",
+    "entry_id": "679578146",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany wrong drugs Transcribed/Indented",
+    "entry_id": "1305461127",
+    "type": 0
+  },
+  {
+    "question": "Were Wrong strength Transcribed/Indented",
+    "entry_id": "1152469130",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many Wrong Strengths Transcribed/Indented",
+    "entry_id": "1672349750",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs dispensed correctly",
+    "entry_id": "2095581020",
+    "type": 2,
+    "options": [
+      "YES",
+      "NO"
+    ]
+  },
+  {
+    "question": "How many wrong drugs dispensed",
+    "entry_id": "596594851",
+    "type": 0
+  },
+  {
+    "question": "Were all drug doses dispensed correctly",
+    "entry_id": "995230279",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany wrong dose dispensed",
+    "entry_id": "85682471",
+    "type": 0
+  },
+  {
+    "question": "Were all drug formulations dispensed correctly",
+    "entry_id": "2142693570",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many wrong drug formulations dispensed",
+    "entry_id": "1614786540",
+    "type": 0
+  },
+  {
+    "question": "Were Drugs  dispensed before Expiry/Near Expiry",
+    "entry_id": "489668709",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many Expired /Near Expiry drugs dispensed ",
+    "entry_id": "1533117056",
+    "type": 0
+  },
+  {
+    "question": "Were drugs dispensed with correct labelling",
+    "entry_id": "582121765",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs dispensed in wrong /No drug labelling ",
+    "entry_id": "685629190",
+    "type": 0
+  },
+  {
+    "question": "All drugs dispensed in  defined Time",
+    "entry_id": "112244978",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs were dispensed lately",
+    "entry_id": "280016434",
+    "type": 0
+  },
+  {
+    "question": "Is Generic substitute done without consultation",
+    "entry_id": "1797529441",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs generic substitute done without consultation",
+    "entry_id": "527453480",
+    "type": 0
+  },
+  {
+    "question": "Were drugs administered to the correct patient",
+    "entry_id": "579723155",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs were administered to wrong patient",
+    "entry_id": "2080271879",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered to the patient",
+    "entry_id": "539645912",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs were omitted to the patient",
+    "entry_id": "603507081",
+    "type": 0
+  },
+  {
+    "question": "Were all the drugs adminstered in correct dose",
+    "entry_id": "1511757628",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drug doses were adminstered improperly",
+    "entry_id": "1707724783",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered  correctly",
+    "entry_id": "752051084",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many wrong drugs were adminstered",
+    "entry_id": "235949186",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered in correct dosage form",
+    "entry_id": "773238462",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many wrong dosage forms were adminstered ",
+    "entry_id": "1528301108",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered in right route",
+    "entry_id": "2098047402",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many wrong routes of drugs administered",
+    "entry_id": "1463831250",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered in Correct Rate",
+    "entry_id": "2100423117",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs were adminstered in wrong Rate",
+    "entry_id": "469944753",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered in correct duration",
+    "entry_id": "500853983",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany drugs were not administered at correct duration",
+    "entry_id": "791033352",
+    "type": 0
+  },
+  {
+    "question": "Were all drugs administered in correct time",
+    "entry_id": "1355742435",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs were administered in wrong time",
+    "entry_id": "254440007",
+    "type": 0
+  },
+  {
+    "question": "Was Documentation of drug administration done properly",
+    "entry_id": "1827676895",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs  documentation was not done properly",
+    "entry_id": "1789475478",
+    "type": 0
+  },
+  {
+    "question": "Documentation completly and Properly done by Nursing Staff",
+    "entry_id": "2033731235",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "Howmany drugs documentation completly and properly not done by nursing staff",
+    "entry_id": "1154643070",
+    "type": 0
+  },
+  {
+    "question": "Documentation without administration",
+    "entry_id": "1122021611",
+    "type": 2,
+    "options": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "question": "How many drugs documented without administration",
+    "entry_id": "59391624",
+    "type": 0
+  },
+  {
+    "question": "Audit observations",
+    "entry_id": "1683552119",
+    "type": 1
+  }
+]

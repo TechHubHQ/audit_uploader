@@ -21,108 +21,120 @@ func main() {
 		panic(err)
 	}
 
-	fields := make([]FormField, 0)
-
 	html := string(data)
+
 	const marker = "var FB_PUBLIC_LOAD_DATA_ = "
+
 	start := strings.Index(html, marker)
 	if start == -1 {
 		panic("form data not found")
 	}
 
 	start += len(marker)
+
 	end := strings.Index(html[start:], ";")
+	if end == -1 {
+		panic("end of form data not found")
+	}
+
 	raw := html[start : start+end]
 
 	var formData []any
+
 	err = json.Unmarshal([]byte(raw), &formData)
 	if err != nil {
 		panic(err)
 	}
 
-	// Navigate to questions
+	// Navigate to questions.
 	level1 := formData[1].([]any)
 	level2 := level1[1].([]any)
 	questions := level2
 
 	fmt.Println("Total elements:", len(questions))
 
+	fields := make([]FormField, 0)
+
 	for _, q := range questions {
-		question := q.([]any)
+
+		// Each question is itself an []any.
+		question, ok := q.([]any)
+		if !ok {
+			continue
+		}
+
+		// Need at least question ID, title, type, etc.
 		if len(question) < 5 {
 			continue
 		}
 
+		// Question title.
 		title, ok := question[1].(string)
 		if !ok {
 			continue
 		}
 
-		fmt.Println("--------------------")
-		fmt.Println("Question:", title)
-		fmt.Println("Type:", question[3])
-
-		// Extract entry ID
-		entryData, ok := question[4].([]any)
-		if !ok || len(entryData) == 0 {
-			fmt.Println("Entry ID: None")
+		// Question type.
+		questionType, ok := question[3].(float64)
+		if !ok {
 			continue
 		}
 
-		questionType := int(question[3].(float64))
+		// Type 8 is a section/header, not an actual form field.
+		if int(questionType) == 8 {
+			continue
+		}
 
-		var options []string
-
-		if questionType == 2 {
-
-			entryData := question[4].([]interface{})
-
-			first := entryData[0].([]interface{})
-
-			optionData, ok := first[1].([]interface{})
-
-			if ok {
-
-				for _, opt := range optionData {
-
-					option := opt.([]interface{})
-
-					options = append(
-						options,
-						option[0].(string),
-					)
-				}
-			}
+		// Extract entry information.
+		entryData, ok := question[4].([]any)
+		if !ok || len(entryData) == 0 {
+			continue
 		}
 
 		firstEntry, ok := entryData[0].([]any)
 		if !ok || len(firstEntry) == 0 {
-			fmt.Println("Entry ID: None")
 			continue
 		}
 
-		entryID := firstEntry[0]
+		// Entry ID.
+		entryIDFloat, ok := firstEntry[0].(float64)
+		if !ok {
+			continue
+		}
+
+		entryID := strconv.FormatInt(int64(entryIDFloat), 10)
 
 		field := FormField{
 			Question: title,
-			EntryID:  strconv.FormatInt(int64(entryID.(float64)), 10),
-			Type:     questionType,
-			Options:  options,
+			EntryID:  entryID,
+			Type:     int(questionType),
+			Options:  getOptions(question),
 		}
+
+		fmt.Println("--------------------")
+		fmt.Println("Question:", field.Question)
+		fmt.Println("Type:", field.Type)
+		fmt.Println("Entry ID:", field.EntryID)
+
+		if len(field.Options) > 0 {
+			fmt.Println("Options:", field.Options)
+		}
+
 		fields = append(fields, field)
 	}
 
 	jsonData, err := json.MarshalIndent(fields, "", "  ")
-
 	if err != nil {
 		panic(err)
 	}
 
-	os.WriteFile(
-		"form_fields.json",
-		jsonData,
-		0644,
-	)
+	err = os.WriteFile("form_fields.json", jsonData, 0644)
+	if err != nil {
+		panic(err)
+	}
 
-	fmt.Println("form_fields.json created")
+	fmt.Printf(
+		"\nform_fields.json created with %d fields\n",
+		len(fields),
+	)
 }
