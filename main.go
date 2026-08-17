@@ -15,6 +15,10 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
+// ------------------------------------------------------------
+// TYPES
+// ------------------------------------------------------------
+
 type FormField struct {
 	Question string   `json:"question"`
 	EntryID  string   `json:"entry_id"`
@@ -35,13 +39,22 @@ type SubmissionResult struct {
 	Error    string
 }
 
+// ------------------------------------------------------------
+// GOOGLE FORM SUBMISSION
+// ------------------------------------------------------------
+
 func submitForm(payload url.Values) error {
 	const formURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScuaiAFmILMbBua-wxXuQqh-3_uJAg_bxmSbFNix8kiw5LiGQ/formResponse"
 
-	resp, err := http.PostForm(formURL, payload)
-	if err != nil {
-		return err
+	client := &http.Client{
+		Timeout: 30 * time.Second,
 	}
+
+	resp, err := client.PostForm(formURL, payload)
+	if err != nil {
+		return fmt.Errorf("HTTP request failed: %w", err)
+	}
+
 	defer resp.Body.Close()
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 400 {
@@ -54,14 +67,14 @@ func submitForm(payload url.Values) error {
 	return nil
 }
 
-func writeSubmissionLog(
-	result SubmissionResult,
-) error {
+// ------------------------------------------------------------
+// WRITE SUBMISSION LOG
+// ------------------------------------------------------------
 
+func writeSubmissionLog(result SubmissionResult) error {
 	const filename = "submission_log.csv"
 
 	_, err := os.Stat(filename)
-
 	fileExists := err == nil
 
 	file, err := os.OpenFile(
@@ -69,7 +82,6 @@ func writeSubmissionLog(
 		os.O_CREATE|os.O_WRONLY|os.O_APPEND,
 		0644,
 	)
-
 	if err != nil {
 		return err
 	}
@@ -80,7 +92,6 @@ func writeSubmissionLog(
 	defer writer.Flush()
 
 	if !fileExists {
-
 		err := writer.Write([]string{
 			"ExcelRow",
 			"UHID",
@@ -88,7 +99,6 @@ func writeSubmissionLog(
 			"Status",
 			"Error",
 		})
-
 		if err != nil {
 			return err
 		}
@@ -297,9 +307,8 @@ func isInteger(value string) bool {
 // CONDITIONAL COUNT VALIDATION
 //
 // Blank count fields are allowed.
-//
-// If a count is populated, it must be a
-// non-negative integer.
+// NA is allowed.
+// Populated values must be non-negative integers.
 // ------------------------------------------------------------
 
 func validateConditionalCounts(
@@ -314,7 +323,6 @@ func validateConditionalCounts(
 
 	for excelHeader := range record.Values {
 
-		// Ignore NA Excel columns.
 		if strings.EqualFold(
 			strings.TrimSpace(excelHeader),
 			"NA",
@@ -359,7 +367,8 @@ func validateConditionalCounts(
 			continue
 		}
 
-		excelCountHeader, ok := excelByFormQuestion[normalize(countField.Question)]
+		excelCountHeader, ok :=
+			excelByFormQuestion[normalize(countField.Question)]
 
 		if !ok {
 			continue
@@ -374,7 +383,7 @@ func validateConditionalCounts(
 			continue
 		}
 
-		// NA is also valid.
+		// NA is valid.
 		if strings.EqualFold(count, "NA") {
 			continue
 		}
@@ -382,7 +391,6 @@ func validateConditionalCounts(
 		n, err := strconv.Atoi(count)
 
 		if err != nil {
-
 			errors = append(
 				errors,
 				fmt.Sprintf(
@@ -396,7 +404,6 @@ func validateConditionalCounts(
 		}
 
 		if n < 0 {
-
 			errors = append(
 				errors,
 				fmt.Sprintf(
@@ -444,7 +451,6 @@ func validateRow(
 	for _, header := range required {
 
 		if get(header) == "" {
-
 			errors = append(
 				errors,
 				fmt.Sprintf(
@@ -466,12 +472,10 @@ func validateRow(
 		)
 
 		if err != nil {
-
 			errors = append(
 				errors,
 				err.Error(),
 			)
-
 		} else if t.Month() != time.August {
 
 			errors = append(
@@ -493,12 +497,10 @@ func validateRow(
 		excelHeader = strings.TrimSpace(excelHeader)
 		value = strings.TrimSpace(value)
 
-		// Empty header.
 		if excelHeader == "" {
 			continue
 		}
 
-		// "NA" as an Excel column/header.
 		if strings.EqualFold(
 			excelHeader,
 			"NA",
@@ -506,12 +508,10 @@ func validateRow(
 			continue
 		}
 
-		// Blank source value.
 		if value == "" {
 			continue
 		}
 
-		// "NA" means Not Applicable.
 		if strings.EqualFold(
 			value,
 			"NA",
@@ -563,7 +563,6 @@ func validateRow(
 	// --------------------------------------------------------
 
 	countFields := []string{
-
 		"Total number of drugs in the prescription",
 
 		"How many drugs did not have doses stated appropriately",
@@ -639,12 +638,10 @@ func validateRow(
 
 		value := get(header)
 
-		// Blank is allowed.
 		if value == "" {
 			continue
 		}
 
-		// NA is allowed.
 		if strings.EqualFold(value, "NA") {
 			continue
 		}
@@ -681,7 +678,6 @@ func validateRow(
 // ------------------------------------------------------------
 // BUILD GOOGLE FORM PAYLOAD
 //
-// IMPORTANT:
 // This function ONLY builds the payload.
 // It NEVER sends an HTTP request.
 // ------------------------------------------------------------
@@ -856,6 +852,7 @@ func writeDryRunReport(
 // ------------------------------------------------------------
 
 func main() {
+
 	valid := 0
 	invalid := 0
 	submitted := 0
@@ -873,15 +870,42 @@ func main() {
 	)
 
 	flag.Parse()
+
+	// --------------------------------------------------------
+	// MODE
+	// --------------------------------------------------------
+
 	if *submitMode {
+
 		fmt.Println("SUBMISSION MODE")
 
 		if *limit > 0 {
-			fmt.Printf("Submission limit: %d\n", *limit)
+			fmt.Printf(
+				"Submission limit: %d\n",
+				*limit,
+			)
+		} else {
+			fmt.Println(
+				"Submission limit: unlimited",
+			)
 		}
+
 	} else {
 		fmt.Println("DRY RUN")
 	}
+
+	fmt.Println(
+		"========================================",
+	)
+
+	fmt.Println(
+		"AUGUST VALIDATION + DRY RUN",
+	)
+
+	fmt.Println(
+		"========================================",
+	)
+
 	// --------------------------------------------------------
 	// OPEN EXCEL
 	// --------------------------------------------------------
@@ -940,18 +964,6 @@ func main() {
 
 	headers := rows[0]
 
-	fmt.Println(
-		"========================================",
-	)
-
-	fmt.Println(
-		"AUGUST VALIDATION + DRY RUN",
-	)
-
-	fmt.Println(
-		"========================================",
-	)
-
 	fmt.Printf(
 		"Data rows: %d\n\n",
 		len(rows)-1,
@@ -1003,7 +1015,6 @@ func main() {
 		}
 
 		uhid := record.Values["UHID/IP Number"]
-
 		auditDate := record.Values["Audit Date"]
 
 		// ----------------------------------------------------
@@ -1035,11 +1046,11 @@ func main() {
 				uhid,
 			)
 
-			for _, err := range errors {
+			for _, validationError := range errors {
 
 				fmt.Printf(
 					"    - %s\n",
-					err,
+					validationError,
 				)
 			}
 
@@ -1104,9 +1115,6 @@ func main() {
 
 		// ----------------------------------------------------
 		// READY
-		//
-		// IMPORTANT:
-		// Payload is built but NEVER submitted.
 		// ----------------------------------------------------
 
 		valid++
@@ -1130,78 +1138,87 @@ func main() {
 			},
 		)
 
-		// --------------------------------------------------------
+		// ----------------------------------------------------
 		// REAL SUBMISSION
 		//
-		// Only happens when --submit is explicitly supplied.
-		// --------------------------------------------------------
+		// HTTP request happens ONLY here.
+		// ----------------------------------------------------
 
-		if *submitMode {
+		if !*submitMode {
+			continue
+		}
 
-			// Respect --limit.
-			if *limit > 0 && submitted >= *limit {
-				continue
-			}
+		// Respect --limit.
+		if *limit > 0 && submitted >= *limit {
+			continue
+		}
 
-			fmt.Printf(
-				"    SUBMITTING row %d...\n",
-				record.RowNumber,
-			)
+		fmt.Printf(
+			"    SUBMITTING row %d...\n",
+			record.RowNumber,
+		)
 
-			err := submitForm(payload)
+		// ----------------------------------------------------
+		// SEND HTTP REQUEST
+		// ----------------------------------------------------
 
-			if err != nil {
+		err = submitForm(payload)
 
-				fmt.Printf(
-					"    SUBMISSION FAILED: %v\n",
-					err,
-				)
-
-				if err := writeSubmissionLog(
-					SubmissionResult{
-						ExcelRow: record.RowNumber,
-						UHID:     uhid,
-						Date:     auditDate,
-						Status:   "FAILED",
-						Error:    err.Error(),
-					},
-				); err != nil {
-
-					fmt.Printf(
-						"    WARNING: could not write submission log: %v\n",
-						err,
-					)
-				}
-
-				continue
-			}
-
-			submitted++
+		if err != nil {
 
 			fmt.Printf(
-				"    SUBMITTED successfully\n",
+				"    SUBMISSION FAILED: %v\n",
+				err,
 			)
 
-			if err := writeSubmissionLog(
+			if logErr := writeSubmissionLog(
 				SubmissionResult{
 					ExcelRow: record.RowNumber,
 					UHID:     uhid,
 					Date:     auditDate,
-					Status:   "SUCCESS",
-					Error:    "",
+					Status:   "FAILED",
+					Error:    err.Error(),
 				},
-			); err != nil {
+			); logErr != nil {
 
 				fmt.Printf(
 					"    WARNING: could not write submission log: %v\n",
-					err,
+					logErr,
 				)
 			}
+
+			continue
+		}
+
+		// ----------------------------------------------------
+		// SUCCESS
+		// ----------------------------------------------------
+
+		submitted++
+
+		fmt.Printf(
+			"    SUBMITTED successfully\n",
+		)
+
+		if err := writeSubmissionLog(
+			SubmissionResult{
+				ExcelRow: record.RowNumber,
+				UHID:     uhid,
+				Date:     auditDate,
+				Status:   "SUCCESS",
+				Error:    "",
+			},
+		); err != nil {
+
+			fmt.Printf(
+				"    WARNING: could not write submission log: %v\n",
+				err,
+			)
 		}
 	}
 
 	// --------------------------------------------------------
-	// WRITE CSV REPORT
+	// WRITE DRY-RUN CSV
 	// --------------------------------------------------------
 
 	if err := writeDryRunReport(
@@ -1217,7 +1234,7 @@ func main() {
 	)
 
 	// --------------------------------------------------------
-	// SUMMARY
+	// FINAL SUMMARY
 	// --------------------------------------------------------
 
 	fmt.Println()
@@ -1234,48 +1251,45 @@ func main() {
 		"========================================",
 	)
 
-	fmt.Println(
-		"Ready  :",
+	fmt.Printf(
+		"Ready     : %d\n",
 		valid,
 	)
 
-	fmt.Println(
-		"Blocked:",
+	fmt.Printf(
+		"Blocked   : %d\n",
 		invalid,
 	)
 
-	fmt.Println(
-		"Submitted:",
+	fmt.Printf(
+		"Submitted : %d\n",
 		submitted,
 	)
 
-	fmt.Println(
-		"Total  :",
+	fmt.Printf(
+		"Total     : %d\n",
 		len(rows)-1,
 	)
 
-	fmt.Println()
-
-	fmt.Println(
-		"NO HTTP REQUESTS WERE SENT.",
-	)
-
-	fmt.Println("========================================")
-	fmt.Println("SUMMARY")
-	fmt.Println("========================================")
-
-	fmt.Printf("Ready     : %d\n", valid)
-	fmt.Printf("Blocked   : %d\n", invalid)
-	fmt.Printf("Submitted : %d\n", submitted)
-	fmt.Printf("Total     : %d\n", len(records))
+	// --------------------------------------------------------
+	// HTTP STATUS
+	// --------------------------------------------------------
 
 	if *submitMode {
+
 		fmt.Printf(
 			"HTTP submissions sent: %d\n",
 			submitted,
 		)
+
 	} else {
-		fmt.Println("NO HTTP REQUESTS WERE SENT.")
+
+		fmt.Println(
+			"NO HTTP REQUESTS WERE SENT.",
+		)
 	}
 
+	fmt.Println(
+		"========================================",
+	)
 }
