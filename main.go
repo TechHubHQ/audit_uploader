@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -50,16 +51,102 @@ func submitForm(payload url.Values) error {
 		Timeout: 30 * time.Second,
 	}
 
-	resp, err := client.PostForm(formURL, payload)
+	fmt.Println()
+	fmt.Println("========== GOOGLE FORM REQUEST ==========")
+
+	fmt.Printf(
+		"Payload fields: %d\n",
+		len(payload),
+	)
+
+	for key, values := range payload {
+		for _, value := range values {
+			fmt.Printf(
+				"%s = %q\n",
+				key,
+				value,
+			)
+		}
+	}
+
+	fmt.Println("=========================================")
+
+	resp, err := client.PostForm(
+		formURL,
+		payload,
+	)
+
 	if err != nil {
-		return fmt.Errorf("HTTP request failed: %w", err)
+		return fmt.Errorf(
+			"HTTP request failed: %w",
+			err,
+		)
 	}
 
 	defer resp.Body.Close()
 
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf(
+			"failed to read Google response: %w",
+			err,
+		)
+	}
+
+	// Save Google's actual response for inspection.
+	if err := os.WriteFile(
+		"google_response.html",
+		body,
+		0644,
+	); err != nil {
+		return fmt.Errorf(
+			"failed to save Google response: %w",
+			err,
+		)
+	}
+
+	responseHTML := string(body)
+
+	fmt.Println()
+	fmt.Println("========== GOOGLE FORM RESPONSE =========")
+	fmt.Println("HTTP status:", resp.Status)
+	fmt.Println("Body length:", len(body))
+	fmt.Println("Saved to: google_response.html")
+
+	checks := []string{
+		"Your response has been recorded",
+		"This question is required",
+		"required",
+		"error",
+		"Please fill",
+	}
+
+	for _, check := range checks {
+		fmt.Printf(
+			"Contains %-35q : %v\n",
+			check,
+			strings.Contains(
+				strings.ToLower(responseHTML),
+				strings.ToLower(check),
+			),
+		)
+	}
+
+	fmt.Println("=========================================")
+
 	if resp.StatusCode < 200 || resp.StatusCode >= 400 {
 		return fmt.Errorf(
 			"Google Form returned HTTP status %s",
+			resp.Status,
+		)
+	}
+
+	if !strings.Contains(
+		responseHTML,
+		"Your response has been recorded",
+	) {
+		return fmt.Errorf(
+			"Google returned HTTP %s but no response confirmation was found",
 			resp.Status,
 		)
 	}
@@ -869,6 +956,12 @@ func main() {
 		"maximum number of READY rows to submit; 0 means unlimited",
 	)
 
+	startRow := flag.Int(
+		"start",
+		2,
+		"first Excel row to process",
+	)
+
 	flag.Parse()
 
 	// --------------------------------------------------------
@@ -981,6 +1074,10 @@ func main() {
 	// --------------------------------------------------------
 
 	for rowIndex := 1; rowIndex < len(rows); rowIndex++ {
+
+		if rowIndex+1 < *startRow {
+			continue
+		}
 
 		row := rows[rowIndex]
 
