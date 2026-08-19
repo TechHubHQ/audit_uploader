@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/go-rod/rod"
 	"github.com/go-rod/rod/lib/launcher"
 )
@@ -20,6 +18,4 @@ func launchBrowser() {
 	page := browser.MustPage("https://forms.gle/jeCB1AuEmiW1Uzr39")
 	page.MustWindowMaximize()
 	page.MustWaitLoad()
-
-	time.Sleep(5 * time.Second)
 }
