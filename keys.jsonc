@@ -1,0 +1,124 @@
+{
+    /* All class names identifiers other than class name
+       will be mentioned in comment specially
+    */
+    "page1": {
+        "Next Button": "NPEfkd RveJvd snByac"
+    },
+    "page2": {
+        "UHID": "whsOnd zHQkBf", // take first result
+        "Location": "whsOnd zHQkBf", // take second result
+        "Doctor Name": "whsOnd zHQkBf", // take third result
+        "Department": "whsOnd zHQkBf", // take fourth result
+        "Audit Date": "whsOnd zHQkBf", // take fifth result -- format - mm/dd/yy
+        "Drug Alergies Mentioned": {
+            "Yes": "AB7Lab Id5V1", // take first result
+            "No": "AB7Lab Id5V1" // take second result
+        },
+        "Next Button": "NPEfkd RveJvd snByac" // take second entry
+    },
+    "page3": {
+        "Total number of drugs in the prescription": "whsOnd zHQkBf",
+        "Next Button": "NPEfkd RveJvd snByac" // take second entry
+    },
+    "page4": {
+        "Were all drugs doses stated appropriately": {
+            "Yes": "d7L4fc bJNwt  FXLARc aomaEc ECvBRb", // take first entry
+            "No": "d7L4fc bJNwt  FXLARc aomaEc ECvBRb", // take second entry
+            "If No": {
+                "page5": {
+                    "How many drugs did not have doses stated appropriately": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page5": {
+        "Were all drugs frequency stated appropriately": {
+            "Yes": "d7L4fc bJNwt  FXLARc aomaEc ECvBRb", // take first entry
+            "No": "d7L4fc bJNwt  FXLARc aomaEc ECvBRb", // take second entry
+            "If No": {
+                "page6": {
+                    "How many drugs did not have Frequency stated appropriately": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page6": {
+        "Were all drugs routes stated appropriately": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page7": {
+                    "How many drugs did no have Route stated approriately": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page7": {
+        "Were all drugs are having units mentioned": {
+            "Yes": "AB7Lab Id5V1", // take frist entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page8": {
+                    "Howmany drugs not mentioned Units": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page8": {
+        "Were all drugs having concentration mentioned": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page9": {
+                    "Howmany drugs did not mentioned concentration": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page9": {
+        "Were all drugs are having rate of administration mentioned": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page10": {
+                    "Howmany drugs didnot have rate of administration not mentioned": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page10": {
+        "were prescription having incorrect drug selection": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If Yes": {
+                "page11": {
+                    "Howmany drugs did have incorrect drug selection": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page11": {
+        "Was the prescription legible": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page12": {
+                    "Howmany drugs are illegible": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page12": {
+        "Were only standard abbreviations used in the prescripton": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page13": {
+                    "How many Non approved abbreviations used": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page13": {}
+}
