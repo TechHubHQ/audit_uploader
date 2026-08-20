@@ -1,6 +1,8 @@
 {
-    /* All class names identifiers other than class name
-       will be mentioned in comment specially
+    /*
+    > All class names identifiers other than class name
+    will be mentioned in comment specially
+    > call next for every new page
     */
     "page1": {
         "Next Button": "NPEfkd RveJvd snByac"
@@ -120,5 +122,283 @@
             }
         }
     },
-    "page13": {}
+    "page13": {
+        "Was the prescription written in capital letters": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page14": {
+                    "How many drug names were not written in capital letters": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page14": {
+        "Were Drug-Drug Interactions mentioned appropriately": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page15": {
+                    "How many drugs had non modification of drug dose keeping in mind drug drug interactions": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page15": {
+        "Were Drug-Food interactions mentioned appropriately": {
+            "Yes": "AB7Lab Id5V1", // take first entry
+            "No": "AB7Lab Id5V1", // take second entry
+            "If No": {
+                "page16": {
+                    "How many drugs had non modification of time of administration or dose keeping in mind drug food interactions": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page16": {
+        "Were Wrong Formulation Transcribed/Indented": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If Yes": {
+                "page17": {
+                    "Howmany Wrong Formulation Transcribed/Indented": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page17": {
+        "Were Wrong drugs Transcribed/Indented": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If Yes": {
+                "page18": {
+                    "Howmany wrong drugs Transcribed/Indented": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page18": {
+        "Were Wrong strength Transcribed/Indented": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If Yes": {
+                "page19": {
+                    "How many Wrong Strengths Transcribed/Indented": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page19": {
+        "Were all drugs dispensed correctly": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page20": {
+                    "How many wrong drugs dispensed": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page20": {
+        "Were all drug doses dispensed correctly": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page21": {
+                    "Howmany wrong dose dispensed": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page21": {
+        "Were all drug formulations dispensed correctly": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page22": {
+                    "How many wrong drug formulations dispensed": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page22": {
+        "Were Drugs  dispensed before Expiry/Near Expiry": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page23": {
+                    "How many Expired /Near Expiry drugs dispensed": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page23": {
+        "Were drugs dispensed with correct labelling": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page24": {
+                    "How many drugs dispensed in wrong /No drug labelling": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page24": {
+        "All drugs dispensed in  defined Time": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page25": {
+                    "How many drugs were dispensed lately": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page25": {
+        "Is Generic substitute done without consultation": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If Yes": {
+                "page26": {
+                    "How many drugs generic substitute done without consultation": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page26": {
+        "Were drugs administered to the correct patient": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page27": {
+                    "How many drugs were administered to wrong patient": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page27": {
+        "Were all drugs administered to the patient": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page28": {
+                    "How many drugs were omitted to the patient": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page28": {
+        "Were all the drugs adminstered in correct dose": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page29": {
+                    "How many drug doses were adminstered improperly": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page29": {
+        "Were all drugs administered  correctly": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page30": {
+                    "How many wrong drugs were adminstered": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page30": {
+        "Were all drugs administered in correct dosage form": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page31": {
+                    "How many wrong dosage forms were adminstered": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page31": {
+        "Were all drugs administered in right route": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page32": {
+                    "How many wrong routes of drugs administered": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page32": {
+        "Were all drugs administered in Correct Rate": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page33": {
+                    "How many drugs were adminstered in wrong Rate": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page33": {
+        "Were all drugs administered in correct duration": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page34": {
+                    "Howmany drugs were not administered at correct duration": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page35": {
+        "Were all drugs administered in correct time": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page36": {
+                    "How many drugs were administered in wrong time": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page36": {
+        "Was Documentation of drug administration done properly": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page37": {
+                    "How many drugs  documentation was not done properly": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page37": {
+        "Documentation completly and Properly done by Nursing Staff": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If No": {
+                "page38": {
+                    "Howmany drugs documentation completly and properly not done by nursing staff": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page38": {
+        "Documentation without administration": {
+            "Yes": "AB7Lab Id5V1",
+            "No": "AB7Lab Id5V1",
+            "If Yes": {
+                "page39": {
+                    "How many drugs documented without administration": "whsOnd zHQkBf"
+                }
+            }
+        }
+    },
+    "page39": {
+        "Audit observations": "KHxj8b tL9Q4c",
+        "Submit Button": "NPEfkd RveJvd snByac" // take second entry
+    }
 }
